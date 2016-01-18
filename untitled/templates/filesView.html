@@ -1,0 +1,13 @@
+<!doctype html>
+<h1>Files ({{filesNum}}):<h1>
+<ul>
+{% for f in files %}
+  <li>
+    <h2>{{ f['path'] }}</h2>
+    <div><i>{{ f['size'] }}</i></div>
+	<div>{{ f['mime_type'] }}</div>
+  </li>
+{% else %}
+  <li><em>No files in folder!</em></li>
+{% endfor %}
+<ul>
