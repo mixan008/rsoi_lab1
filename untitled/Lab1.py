@@ -3,11 +3,11 @@ import requests
 
 app = Flask(__name__)
 
-CLIENT_ID = "d762b3ed16ef51c2f258656d5c0fc88c"
-CLIENT_SECRET = "ce8af9a23f706dfb6d818c6bd7dd722c"
+CLIENT_ID = "c17714b0595448f98c73"
+CLIENT_SECRET = "8002f161f15412c454dd55b0d93f231c346f53a5"
 REDIRECT_CODE_URL = "http://localhost:27005/codeflow/auth"
-AUTH_URL = "https://soundcloud.com/connect"
-TOKEN_URL = "https://api.soundcloud.com/oauth2/token"
+AUTH_URL = "https://clever.com/oauth/authorize"
+TOKEN_URL = "https://clever.com/oauth/tokens"
 
 
 TOKEN = ''
@@ -15,19 +15,19 @@ TOKEN = ''
 
 @app.route("/")
 def hello():
-    return "Welcome to Simple RuCenter client!"
+    return render_template('log in button.html')
 
 
 # -----------------------------------------------------------
 # ------------ WebServer Version: Code Flow -----------------
 # -----------------------------------------------------------
 
-@app.route("/codeflow/index")
+@app.route("/codeflow/app")
 def index():
     global TOKEN
 
     headers = {"Authorization": "Bearer " + TOKEN}
-    resp = requests.get("", headers=headers)
+    resp = requests.get("https://clever.com/oauth/tokeninfo", headers=headers)
     j = resp.json()
     keys = j.keys();
     if 'error' in keys:
